@@ -10,7 +10,12 @@ ARG TZ=Asia/Shanghai
 
 RUN apt update &&\
     apt upgrade -y &&\
-    apt install -y mysql-server unixodbc make gcc libmysqlclient-dev unixodbc-dev groff ldap-utils wget curl
+    apt install -y unixodbc make gcc libmysqlclient-dev unixodbc-dev groff ldap-utils wget curl
+
+RUN mkdir -p /tmp/odbc
+RUN cd /tmp/odbc
+RUN wget https://downloads.mysql.com/archives/get/p/10/file/mysql-connector-odbc_8.0.28-1ubuntu20.04_amd64.deb
+RUN dpkg --force-all  -i ./mysql-connector-odbc_8.0.28-1ubuntu20.04_amd64.deb
 
 RUN mkdir -p /tmp/download/openldap &&\
     cd /tmp/download/openldap &&\
