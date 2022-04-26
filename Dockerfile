@@ -10,14 +10,23 @@ ARG TZ=Asia/Shanghai
 
 RUN apt update &&\
     apt upgrade -y &&\
-    apt install -y unixodbc make gcc libmysqlclient-dev unixodbc-dev groff ldap-utils wget curl
+    apt install -y unixodbc make gcc libmysqlclient-dev unixodbc-dev groff ldap-utils build-essential wget curl
 
-RUN mkdir -p /tmp/download &&\
-    cd /tmp/download &&\
+RUN mkidr -p /tmp/download/unixODBC &&\
+    cd /tmp/download/unixODBC &&\
+    wget ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-2.3.9.tar.gz && \
+    tar xvzf unixODBC-2.3.9.tar.gz &&\
+    cd unixODBC-2.3.9/ &&\
+    ./configure --prefix=/usr/local/unixODBC &&\
+    make &&\
+    make install
+
+RUN mkdir -p /tmp/download/openldap &&\
+    cd /tmp/download/openldap &&\
     wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-${OPENLDAP_VERSION}.tgz &&\
     tar -xvzf openldap-${OPENLDAP_VERSION}.tgz &&\
     mv openldap-${OPENLDAP_VERSION} /opt/openldap &&\
-    rm -rf /tmp/download/*
+    rm -rf /tmp/*
 
 WORKDIR /opt/openldap
 
