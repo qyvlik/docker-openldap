@@ -12,11 +12,12 @@ RUN apt install -y unixodbc make gcc libmysqlclient-dev unixodbc-dev groff ldap-
 
 COPY ./config/etc/*.ini /etc/
 
-RUN mkdir -p /tmp/download && cd /tmp/download &&\
-    wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-${OPENLDAP_VERSION}.tgz &&\
-    tar -xvzf openldap-2.4.46.tgz && \
-    mv openldap-2.4.* /opt/openldap && \
-    rm -rf /tmp/download/*
+RUN mkdir -p /tmp/download
+RUN cd /tmp/download
+RUN wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-${OPENLDAP_VERSION}.tgz
+RUN tar -xvzf openldap-2.4.46.tgz
+RUN mv openldap-2.4.* /opt/openldap
+RUN rm -rf /tmp/download/*
 
 WORKDIR /opt/openldap
 
