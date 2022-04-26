@@ -6,8 +6,9 @@ FROM ubuntu
 
 ARG OPENLDAP_VERSION=2.4.57
 
-RUN apt update && apt upgrade -y &&\
-    apt install unixodbc make gcc libmysqlclient-dev unixodbc-dev groff ldap-utils
+RUN apt update
+RUN apt upgrade -y
+RUN apt install unixodbc make gcc libmysqlclient-dev unixodbc-dev groff ldap-utils
 
 COPY ./config/etc/*.ini /etc/
 
