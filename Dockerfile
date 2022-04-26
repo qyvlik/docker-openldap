@@ -33,7 +33,7 @@ RUN ./configure --prefix=/usr \
     --enable-sql \
     --disable-bdb \
     --disable-ndb \
-    --disable-hdb \
+    --disable-hdb
 
 RUN make depend
 RUN make
