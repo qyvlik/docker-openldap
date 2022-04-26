@@ -15,8 +15,8 @@ COPY ./config/etc/*.ini /etc/
 RUN mkdir -p /tmp/download
 RUN cd /tmp/download
 RUN wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-${OPENLDAP_VERSION}.tgz
-RUN tar -xvzf openldap-2.4.46.tgz
-RUN mv openldap-2.4.* /opt/openldap
+RUN tar -xvzf openldap-${OPENLDAP_VERSION}.tgz
+RUN mv openldap-${OPENLDAP_VERSION} /opt/openldap
 RUN rm -rf /tmp/download/*
 
 WORKDIR /opt/openldap
@@ -33,10 +33,11 @@ RUN ./configure --prefix=/usr \
     --enable-sql \
     --disable-bdb \
     --disable-ndb \
-    --disable-hdb &&\
-    make depend && \
-    make && \
-    make install
+    --disable-hdb \
+
+RUN make depend
+RUN make
+RUN make install
 
 COPY ./config/etc/openldap/*.conf /etc/openldap/
 COPY ./scripts/docker-entrypoint.sh /docker-entrypoint.sh
