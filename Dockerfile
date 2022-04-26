@@ -5,6 +5,8 @@
 FROM ubuntu:20.04
 
 ARG OPENLDAP_VERSION=2.4.57
+ARG DEBIAN_FRONTEND=noninteractive
+ARG TZ=Asia/Shanghai
 
 RUN apt update &&\
     apt upgrade -y &&\
