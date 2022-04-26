@@ -9,8 +9,7 @@ ARG OPENLDAP_VERSION=2.4.57
 RUN apt update && apt upgrade -y &&\
     apt install unixodbc make gcc libmysqlclient-dev unixodbc-dev groff ldap-utils
 
-COPY ./config/etc/odbcinst.ini /etc/odbcinst.ini
-COPY ./config/etc/odbc.ini.ini /etc/odbc.ini
+COPY ./config/etc/*.ini /etc/
 
 RUN mkdir -p /tmp/download && cd /tmp/download &&\
     wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-${OPENLDAP_VERSION}.tgz &&\
@@ -37,7 +36,7 @@ RUN ./configure --prefix=/usr \
     make && \
     make install
 
-COPY ./config/etc/openldap/slapd.conf /etc/openldap/slapd.conf
+COPY ./config/etc/openldap/*.conf /etc/openldap/
 COPY ./scripts/docker-entrypoint.sh /docker-entrypoint.sh
 
 EXPOSE 389
