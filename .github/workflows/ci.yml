@@ -29,6 +29,6 @@ jobs:
           push: true
           tags: qyvlik/openldap:latest
           build-args: |
-            BUILD_APP_GIT_TAG=master
+            OPENLDAP_VERSION=2.4.57
             BUILD_APP_GIT_HASH=${{ github.sha }}
             BUILD_APP_BUILDER=${{ github.actor }}
