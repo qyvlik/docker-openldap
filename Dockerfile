@@ -47,6 +47,8 @@ COPY ./config/etc/*.ini /etc/
 COPY ./config/etc/openldap/*.conf /etc/openldap/
 COPY ./scripts/docker-entrypoint.sh /docker-entrypoint.sh
 
+VOLUME /var/run/
+
 EXPOSE 389
 EXPOSE 636
 
