@@ -10,8 +10,6 @@ RUN apt update &&\
     apt upgrade -y &&\
     apt install -y unixodbc make gcc libmysqlclient-dev unixodbc-dev groff ldap-utils wget curl
 
-COPY ./config/etc/*.ini /etc/
-
 RUN mkdir -p /tmp/download &&\
     cd /tmp/download &&\
     wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-${OPENLDAP_VERSION}.tgz &&\
@@ -38,6 +36,7 @@ RUN ./configure --prefix=/usr \
     make &&\
     make install
 
+COPY ./config/etc/*.ini /etc/
 COPY ./config/etc/openldap/*.conf /etc/openldap/
 COPY ./scripts/docker-entrypoint.sh /docker-entrypoint.sh
 
