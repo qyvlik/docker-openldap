@@ -46,6 +46,7 @@ RUN ./configure --prefix=/usr \
 COPY ./config/etc/*.ini /etc/
 COPY ./config/etc/openldap/*.conf /etc/openldap/
 COPY ./scripts/docker-entrypoint.sh /docker-entrypoint.sh
+COPY ./config/etc/openldap/schema/*.schema /etc/openldap/schema/
 
 VOLUME /var/run/
 
